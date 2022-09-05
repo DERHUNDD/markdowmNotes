@@ -4,24 +4,76 @@
 
 1. 获取免登授权码。
    - [x]  [微应用免登](https://open.dingtalk.com/document/orgapp-client/logon-free-process) 
+   
 2. 获取AccessToken。
-   - [ ]  调用接口获取access_token，详情请参考 [获取企业内部应用的access_token](https://open.dingtalk.com/document/orgapp-server/obtain-orgapp-token)。
+   - [x] 调用接口获取access_token，详情请参考 [获取企业内部应用的access_token](https://open.dingtalk.com/document/orgapp-server/obtain-orgapp-token)。
+   
+     ```JSON
+     {
+     	"errcode": 0,
+     	"access_token": "e24bb103f31930fa964f13439d80e78a",
+     	"errmsg": "ok",
+     	"expires_in": 7200 //11.26.00请求
+     }
+     ```
+   
+     
+   
 3. 获取userid。
-   - [ ]  调用接口获取用户的userid，详情请参考 [通过免登码获取用户信息](https://open.dingtalk.com/document/orgapp-server/obtain-the-userid-of-a-user-by-using-the-log-free)。
+   - [x] 调用接口获取用户的userid，详情请参考 [通过免登码获取用户信息](https://open.dingtalk.com/document/orgapp-server/obtain-the-userid-of-a-user-by-using-the-log-free)。
+   
+     （利用 accesstoken 以及 免登码 code）
+   
+     ```json
+     {
+     	"errcode": 0,
+     	"errmsg": "ok",
+     	"result": {
+     		"device_id": "20f1206c9e77357eb6889ae4188666d8",
+     		"name": "吴年乐",
+     		"sys": false,
+     		"sys_level": 0,
+     		"unionid": "Eqyl1iPsafiiN8iPhiPWRYLufgiEiE",
+     		"userid": "01542667325021484944"
+     	},
+     	"request_id": "16m2wlaqfr37e"
+     }
+     ```
+   
+     
+   
 4. 获取用户详情。
-   - [ ]  调用接口获取用户详细信息，详情请参考 [根据userId获取用户详情](https://open.dingtalk.com/document/orgapp-server/query-user-details)。
+   - [x] 调用接口获取用户详细信息，详情请参考 [根据userId获取用户详情](https://open.dingtalk.com/document/orgapp-server/query-user-details)。
+   
+     （利用 accesstoken 以及 userid）
+   
+     * 无该接口权限
+   
+     
 
 ## ②、JSAPI鉴权 (获取密钥)
 
 1. 获取access_token
 
-   - [ ]  企业内部应用可通过[获取企业内部应用的access_token](https://open.dingtalk.com/document/orgapp-server/obtain-orgapp-token#topic-1936350)接口获取。
+   - [x]  企业内部应用可通过[获取企业内部应用的access_token](https://open.dingtalk.com/document/orgapp-server/obtain-orgapp-token#topic-1936350)接口获取。
 
 2. 获取jsapi_ticket
 
-   - [ ]  通过[获取jsapi_ticket](https://open.dingtalk.com/document/isvapp-server/obtain-jsapi_ticket#topic-1936785)接口获取 jsapi_ticket 时，请注意：
+   - [x] 通过[获取jsapi_ticket](https://open.dingtalk.com/document/isvapp-server/obtain-jsapi_ticket#topic-1936785)接口获取 jsapi_ticket 时，请注意：
 
+     ```JSON
+     {
+     	"errcode": 0,
+     	"errmsg": "ok",
+     	"ticket": "8T7tKdlbRbD8aHPLb6631q6ZpwYT7fYjHCkEeVaniZc8kKbghrG6V5SmkJrHQRSWJ8Zlb8wDEQb8rSeVGrKwFV",
+     	"expires_in": 7200 // 11.47.00请求
+     }
+     ```
+   
+     
+   
    - 企业内部应用和第三方企业应用获取 jsapi_ticket 后，当 jsapi_ticket 未过期时，再次调用 get_jsapi_ticket 接口获取到的 jsapi_ticket 和老的 jsapi_ticket 值相同，只是**过期时间续期2小时**。
+   
    - 企业内部应用获取 jsapi_ticket ，一个 appKey 对应一个 jsapi_ticket ，所以在使用的时候需要将 jsapi_ticket 以 appKey 为维度进行缓存下来（设置缓存过期时间2小时），**并不需要每次都通过接口拉取**。
 
 ## ③、获取签名参数
