@@ -269,26 +269,15 @@ http://g.alicdn.com/avatar/zhangsan.png
 
 ### 1. 调用请求打开指定的群聊
 
-#### 1.1[根据corpid选择会话](https://open.dingtalk.com/document/isvapp-client/select-session-based-on-corpid) (只能选择群聊/创建一个新的群聊)
+- [x] 完成情况
 
-* 携带：
+#### 1.1 根据 corpid 选择会话
 
-  |        字段         |            描述            |
-  | :-----------------: | :------------------------: |
-  |       corpId        |        企业的corpid        |
-  | isAllowCreateGroup  |    是否允许创建新的会话    |
-  | filterNotOwnerGroup | 是否限制为自己创建的会话。 |
-
-* 返回值：
-
-  |  参数  |           说明            |
-  | :----: | :-----------------------: |
-  | chatId | 会话id.该会话id永久有效。 |
-  | title  |        会话的标题         |
-
-
+#### 1.2 根据 chatId 跳转到对应会话
 
 ### 2. 像分享一下，将编辑好的数据发送到选中的群聊
+
+- [x] 完成情况
 
 #### 2.1 [获取会话信息](https://open.dingtalk.com/document/isvapp-client/obtain-session-information-1) (可选择联系人)
 
@@ -326,12 +315,32 @@ http://g.alicdn.com/avatar/zhangsan.png
 
 ### 3. 以**企业的名义**向企业群会话里推送消息
 
+- [x] 完成情况
+
 * 但只支持内部群、全员群以及部门群，普通群和合作群无法实现该功能。
 
 * 携带：
 
   * Query参数： access_token
-  * Body参数：chatid （[根据corpid选择会话](https://open.dingtalk.com/document/orgapp-client/select-session-based-on-corpid?spm=ding_open_doc.document.0.0.58c6722fNrTZDF#topic-2025118)）、 msg （最长不超过2048个字节，企业内部应用消息类型和样例参考[消息类型与数据格式](https://open.dingtalk.com/document/orgapp-server/message-types-and-data-format#topic-1945727)）
+  * Body参数：chatid （[根据corpid选择会话 见下方](https://open.dingtalk.com/document/orgapp-client/select-session-based-on-corpid?spm=ding_open_doc.document.0.0.58c6722fNrTZDF#topic-2025118)）、 msg （最长不超过2048个字节，企业内部应用消息类型和样例参考[消息类型与数据格式](https://open.dingtalk.com/document/orgapp-server/message-types-and-data-format#topic-1945727)）
+  * #### [根据corpid选择会话](https://open.dingtalk.com/document/isvapp-client/select-session-based-on-corpid) (只能选择群聊/创建一个新的群聊)
+
+    * 携带：
+
+      |        字段         |            描述            |
+      | :-----------------: | :------------------------: |
+      |       corpId        |        企业的corpid        |
+      | isAllowCreateGroup  |    是否允许创建新的会话    |
+      | filterNotOwnerGroup | 是否限制为自己创建的会话。 |
+
+    * 返回值：
+
+      |  参数  |           说明            |
+      | :----: | :-----------------------: |
+      | chatId | 会话id.该会话id永久有效。 |
+      | title  |        会话的标题         |
+
+    
 
 * 请求示例（HTTP）：
 
@@ -341,9 +350,12 @@ http://g.alicdn.com/avatar/zhangsan.png
 
 * 参考文档：https://open.dingtalk.com/document/orgapp-server/send-group-messages
 
-### 4. 以某个应用的名义推送到员工的工作通知消息
+### 4. 工作通知消息方式
+
+* 工作通知消息是以某个应用的名义推送到员工的工作通知消息
 
 * （这个相当于是发送给个人，不是发送到群聊当中）
+* 参考文档：https://open.dingtalk.com/document/orgapp-server/asynchronous-sending-of-enterprise-session-messages
 
 ### 5. 接入酷应用 - 用户身份发送卡片消息到群
 
@@ -365,3 +377,9 @@ http://g.alicdn.com/avatar/zhangsan.png
 ### 1. 通过酷应用获取信息
 
 https://open.dingtalk.com/document/isvapp-client/message-menu
+
+### 2. 通过机器人获取消息
+
+https://blog.csdn.net/weixin_65690086/article/details/126291918
+
+https://open.dingtalk.com/document/group/enterprise-created-chatbot
